@@ -31,11 +31,11 @@ int main()
     });
 
     CROW_ROUTE(app, "/calc/<string>")
-    ([](const crow::request& req, std::string s) {
+    ([](const crow::request& req, crow::response &res, std::string s) {
         Calc calc;
         double result = calc.evaluate(s);
         crow::json::wvalue x = {{"result", result}};
-        return crow::response(x);
+        res.send(x);
     });
 
     app.port(18080).run();
