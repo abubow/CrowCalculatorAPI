@@ -35,10 +35,10 @@ int main()
         Calc calc;
         double result = calc.evaluate(s);
         crow::json::wvalue x = {{"result", result}};
-        res.sendJSON(x);
+        res.write(crow::json::dump(x));
+        res.end();
     });
 
-    app.port(18080).run();
-
-    return 0;
+    app.loglevel(crow::LogLevel::Warning);
+    app.port(18080).multithreaded().run();
 }
