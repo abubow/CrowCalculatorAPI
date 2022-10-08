@@ -1,5 +1,6 @@
 #include "./include/calc.h"
 #include "crow/middlewares/cors.h"
+#include "./include/json.hpp"
 
 int main()
 {
@@ -34,10 +35,10 @@ int main()
     ([](const crow::request& req, crow::response &res, std::string s) {
         Calc calc;
         double result = calc.evaluate(s);
-        crow::json::wvalue x;
-        x["result"] = result;
-        x["expression"] = s;
-        res.write(crow::json::dump(x));
+        nlohmann::json j;
+        j["result"] = result;
+        res.write(j.dump());
+        res.end();
     });
 
     app.loglevel(crow::LogLevel::Warning);
