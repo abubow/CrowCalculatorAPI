@@ -16,10 +16,12 @@ int main()
         .headers("X-Custom-Header", "Upgrade-Insecure-Requests")
         .methods("POST"_method, "GET"_method)
       .prefix("/cors")
-        .origin("https://cppcalc.netlify.app/")
+        .origin("*")
       .prefix("/nocors")
-        .ignore();
-    // clang-format on
+        .origin("*")
+        .expose("X-Custom-Header")
+        .methods("GET"_method)
+        .max_age(3600);
 
     CROW_ROUTE(app, "/")
     ([]() {
