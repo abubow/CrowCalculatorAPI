@@ -35,7 +35,7 @@ int main()
         Calc calc;
         double result = calc.evaluate(s);
         crow::json::wvalue x = {{"result", result}};
-        res.send(x);
+        res.sendJSON(x);
     });
 
     app.port(18080).run();
