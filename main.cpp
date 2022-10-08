@@ -34,8 +34,7 @@ int main()
     ([](const crow::request& req, crow::response &res, std::string s) {
         Calc calc;
         double result = calc.evaluate(s);
-        crow::json::wvalue x = {{"result", result}};
-        res.write(crow::json::dump(x));
+        res.write(std::to_string(result));
         res.end();
     });
 
