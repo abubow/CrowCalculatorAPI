@@ -19,7 +19,6 @@ int main()
         .origin("*")
       .prefix("/nocors")
         .origin("*")
-        .expose("X-Custom-Header")
         .methods("GET"_method)
         .max_age(3600);
 
