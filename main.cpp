@@ -34,8 +34,10 @@ int main()
     ([](const crow::request& req, crow::response &res, std::string s) {
         Calc calc;
         double result = calc.evaluate(s);
-        res.write(std::to_string(result));
-        res.end();
+        crow::json::wvalue x;
+        x["result"] = result;
+        x["expression"] = s;
+        res.write(crow::json::dump(x));
     });
 
     app.loglevel(crow::LogLevel::Warning);
